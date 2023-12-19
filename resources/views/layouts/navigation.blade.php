@@ -1,47 +1,93 @@
 <!-- resources/views/navigation.blade.php -->
 <style>
-    .inline {
-        display: inline-flex;
-        margin-right: 1rem; /* Adjust the margin as needed */
-        color: #fff; /* Adjust the text color */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa; /* Adjust the background color as needed */
+    }
+
+    .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #3498db; /* Adjust the background color as needed */
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        margin-right: 1rem;
+    }
+
+    .nav-links a {
+        color: #fff;
         text-decoration: none;
-        hover: #ccc; /* Adjust the hover color */
-        outline: none;
+        font-size: 16px; /* Adjust the font size as needed */
+        transition: color 0.3s ease; /* Add a smooth transition on hover */
+    }
+
+    .nav-links a:hover {
+        color: #ccc; /* Adjust the hover color as needed */
+    }
+
+    .nav-links button {
+        color: #fff;
+        text-decoration: none;
         background: none;
         border: none;
         cursor: pointer;
+        font-size: 16px; /* Adjust the font size as needed */
+        transition: color 0.3s ease; /* Add a smooth transition on hover */
+    }
+
+    .nav-links button:hover {
+        color: #ccc; /* Adjust the hover color as needed */
     }
 </style>
 
 <nav class="bg-blue-500 p-4">
-    <div class="container mx-auto flex items-center justify-between hidden lg:flex lg:items-center lg:w-auto">
-        <a class="text-white text-lg font-semibold" href="{{ url('/') }}">Home</a>
+    <div class="container mx-auto nav-container">
+        <a class="text-white text-lg font-semibold" href="{{ url('./notes') }}">Home</a>
 
-        <!-- <button class="text-white focus:outline-none lg:hidden">
-            <span class="text-2xl">&#8801;</span>
-        </button> -->
-
-            <ul class="inline" type='none'>
-                @guest
-                    <li class="mr-4">
-                        <a class="text-white hover:text-gray-300" href="{{ route('login') }}">Login
-                    </a>
-                    </li>
-                    &nbsp;&nbsp;&nbsp;
-                    <li>
-                        <a class="text-white hover:text-gray-300" href="{{ route('register') }}">Register</a>
-                    </li>
-                @else
-                    <li class="mr-4">
-                        <a class="text-white hover:text-gray-300" href="{{ route('notes.index') }}">My Notes</a>
-                    </li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="text-white hover:text-gray-300 focus:outline-none">Logout</button>
-                        </form>
-                    </li>
-                @endguest
-            </ul>
+        <ul class="nav-links">
+            @guest
+                <li>
+                    <a href="{{ route('login') }}">Login</a>
+                </li>
+                <li>
+                    <a href="{{ route('register') }}">Register</a>
+                </li>
+            @else
+                <li>
+                    <a href="{{ route('notes.index') }}">My Notes</a>
+                </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            @endguest
+        </ul>
     </div>
 </nav>

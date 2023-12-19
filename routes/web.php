@@ -33,9 +33,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 });
 
-// Route::get('/login', [NoteController::class, 'create'])
-//     ->middleware('guest')
-//     ->name('login');
+
+
+
+
 
 
 Route::post('/login',function(){
